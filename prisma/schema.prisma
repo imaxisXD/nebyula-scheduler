@@ -11,9 +11,25 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model User {
+  id        String       @unique @default(cuid())
+  email     String       @unique
+  fname     String
+  lname     String?
+  otherInfo Json
+}
 
-model Example {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+model OffHour {
+  id    String    @id @unique @default(cuid())
+  start DateTime?
+  end   DateTime?
+}
+
+model Appointment {
+  id        String   @id @unique @default(cuid())
+  title     String
+  agenda    String?
+  startTime DateTime
+  endTime   DateTime
+  Guest     Json
 }
