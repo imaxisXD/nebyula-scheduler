@@ -11,18 +11,23 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model User {
+model Terraformers {
   id        String       @unique @default(cuid())
   email     String       @unique
   fname     String
   lname     String?
   otherInfo Json
+
+  @@index([email])
 }
 
 model OffHour {
-  id    String    @id @unique @default(cuid())
-  start DateTime?
-  end   DateTime?
+  id        String    @id @unique @default(cuid())
+  start     DateTime?
+  end       DateTime?
+  authorID  String
+
+  @@index([authorID])
 }
 
 model Appointment {
@@ -31,5 +36,8 @@ model Appointment {
   agenda    String?
   startTime DateTime
   endTime   DateTime
-  Guest     Json
+  authorID  String 
+  guest     Json
+
+  @@index([authorID])
 }
